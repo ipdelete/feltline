@@ -57,8 +57,12 @@ reboot
 # - Hyprland Wayland session
 # - Networking, SSH, fonts, key utils
 # -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# Hyprland COPR repository (since Fedora 43 repo is missing it)
+# -----------------------------------------------------------------------------
+repo --name=hyprland-copr --baseurl=https://download.copr.fedorainfracloud.org/results/solopasha/hyprland/fedora-$releasever-x86_64/
+
 %packages
-@^minimal-environment
 @core
 
 # CLI essentials
@@ -69,10 +73,10 @@ curl
 wget
 htop
 tmux
-which
 tar
 zip
 unzip
+which
 bind-utils
 
 # Networking & SSH
@@ -80,21 +84,18 @@ openssh-clients
 openssh-server
 NetworkManager-tui
 
-# Wayland / Hyprland stack (package names may evolve, adjust as needed)
-# Hyprland itself
+# Hyprland + Wayland stack
 hyprland
-
-# Wayland utilities & basics
 xdg-desktop-portal
 xdg-desktop-portal-wlr
 xdg-user-dirs
 xdg-utils
 
-# Terminal & launcher (swap later if you want different ones)
+# Terminal + launcher
 kitty
 wofi
 
-# Status bar / notifications (placeholder; refine in later epics)
+# Bar + notifications
 waybar
 mako
 
@@ -110,16 +111,11 @@ pipewire-pulseaudio
 pipewire-jack-audio-connection-kit
 wireplumber
 
-# Power / misc utilities
+# Utilities
 brightnessctl
 pavucontrol
-
-# Login/session helpers (no full display manager yet)
 seatd
 swaylock
-
-# Keep it lean: no full GNOME, KDE, etc.
-# No @workstation-product-environment, no @gnome-desktop
 %end
 
 # -----------------------------------------------------------------------------
