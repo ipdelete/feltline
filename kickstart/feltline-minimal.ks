@@ -8,7 +8,7 @@ url --url="https://download.fedoraproject.org/pub/fedora/linux/releases/43/Every
 
 lang en_US.UTF-8
 keyboard us
-timezone America/New_York --isUtc
+timezone America/New_York
 
 # -----------------------------------------------------------------------------
 # Networking & hostname
