@@ -60,9 +60,7 @@ reboot
 # -----------------------------------------------------------------------------
 # Hyprland COPR repository (since Fedora 43 repo is missing it)
 # -----------------------------------------------------------------------------
-repo --name=hyprland-copr \
-     --baseurl=https://download.copr.fedorainfracloud.org/results/solopasha/hyprland/fedora-43-x86_64/ \
-     --enabled=1
+repo --name=hyprland-copr --baseurl=https://download.copr.fedorainfracloud.org/results/solopasha/hyprland/fedora-43-x86_64/
 
 %packages
 @core
