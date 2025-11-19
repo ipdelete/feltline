@@ -130,13 +130,59 @@ chromium
 %post
 set -e
 
+# -----------------------------------------------------------------------------
+# 1. Basic system setup
+# -----------------------------------------------------------------------------
+
 # Enable SSH
 systemctl enable sshd
 
-# Ensure graphical.target isn't forced yet; we stay in multi-user and start Hyprland manually.
+# Stay in text mode; you'll start Hyprland from TTY
 systemctl set-default multi-user.target
 
-# Create XDG user dirs for the user
+# -----------------------------------------------------------------------------
+# 2. Pull Feltline repo into the installed system
+# -----------------------------------------------------------------------------
+
+# Clone into /opt so it's not cluttering /home by default
+git clone https://github.com/ipdelete/feltline /opt/feltline || {
+    echo "Failed to clone feltline repo" >&2
+    exit 1
+}
+
+# -----------------------------------------------------------------------------
+# 3. Install Hyprland & Waybar configs for user 'ian'
+# -----------------------------------------------------------------------------
+
+USER_NAME=ian
+USER_HOME=/home/$USER_NAME
+
+# Make sure the home dir exists (should already from user --name, but be safe)
+if [ ! -d "$USER_HOME" ]; then
+    mkdir -p "$USER_HOME"
+    chown "$USER_NAME:$USER_NAME" "$USER_HOME"
+fi
+
+# Create config directories
+mkdir -p "$USER_HOME/.config/hypr"
+mkdir -p "$USER_HOME/.config/waybar"
+
+# Copy configs from repo → user's config dirs
+cp /opt/feltline/configs/hypr/hyprland.conf \
+   "$USER_HOME/.config/hypr/"
+
+cp /opt/feltline/configs/waybar/config.jsonc \
+   /opt/feltline/configs/waybar/style.css \
+   "$USER_HOME/.config/waybar/"
+
+# Fix ownership so ian actually owns their own dotfiles
+chown -R "$USER_NAME:$USER_NAME" "$USER_HOME/.config"
+
+# -----------------------------------------------------------------------------
+# 4. XDG user dirs
+# -----------------------------------------------------------------------------
+
+# Run as ian so the dirs are created with the right owner
 runuser -l ian -c 'xdg-user-dirs-update || true'
 
 %end
