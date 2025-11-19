@@ -13,8 +13,7 @@ timezone America/New_York
 # -----------------------------------------------------------------------------
 # Networking & hostname
 # -----------------------------------------------------------------------------
-network --bootproto=dhcp --device=link --activate
-network --hostname=feltline
+network --bootproto=dhcp --activate --hostname=feltlineok
 
 # -----------------------------------------------------------------------------
 # Bootloader & storage (simple single-disk layout)
