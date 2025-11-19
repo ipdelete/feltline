@@ -184,4 +184,24 @@ chown -R "$USER_NAME:$USER_NAME" "$USER_HOME/.config"
 # Run as ian so the dirs are created with the right owner
 runuser -l ian -c 'xdg-user-dirs-update || true'
 
+# -----------------------------------------------------------------------------
+# 5. GitHub CLI repo + install
+# -----------------------------------------------------------------------------
+
+# Write the official repo file
+cat > /etc/yum.repos.d/gh-cli.repo << 'EOF'
+[gh-cli]
+name=packages for the GitHub CLI
+baseurl=https://cli.github.com/packages/rpm
+enabled=1
+gpgcheck=1
+gpgkey=https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x23F3D4EA75716059
+EOF
+
+# Import the GPG key
+rpm --import https://cli.github.com/packages/rpm/gh-cli.repo.gpg
+
+# Install gh
+dnf install -y gh
+
 %end
