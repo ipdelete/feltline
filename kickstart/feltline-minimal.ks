@@ -4,7 +4,6 @@
 # -----------------------------------------------------------------------------
 # Install source & language
 # -----------------------------------------------------------------------------
-install
 url --url="https://download.fedoraproject.org/pub/fedora/linux/releases/43/Everything/x86_64/os/"
 
 lang en_US.UTF-8
