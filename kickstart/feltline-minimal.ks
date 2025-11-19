@@ -78,6 +78,7 @@ zip
 unzip
 which
 bind-utils
+tree
 
 # Networking & SSH
 openssh-clients
@@ -116,6 +117,9 @@ brightnessctl
 pavucontrol
 seatd
 swaylock
+
+# Productivity
+chromium
 %end
 
 # -----------------------------------------------------------------------------
